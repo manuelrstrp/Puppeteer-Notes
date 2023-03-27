@@ -1,4 +1,5 @@
 const puppeteer = require ('puppeteer') //Importar puppeteer
+const {click, type, doubleClick} = require('../lib/helpers')
 
 describe('Interactuando con elementos',()=>{
   it('Debe de abrir y cerrar el navegador', async()=>{
@@ -13,10 +14,16 @@ describe('Interactuando con elementos',()=>{
     })
     await page.click('#authentication > span', {button: 'right', delay: 500})//click derecho
     await new Promise((res) => setTimeout(res, 3000));
+    //Doble click con helpers
+    await doubleClick(page, '#authentication > button')
+
     await page.click('#authentication > button', {clickCount: 2, delay:500})//doble click
     await new Promise((res) => setTimeout(res, 3000));
     
     await page.goto('https://devexpress.github.io/testcafe/example/')//Pagina de estudio #2
+    //Type con helpers
+    await type(page, '#developer-name', 'Manuel Restrepo', {delay: 100})
+
     await page.type('#developer-name', 'Manuel Restrepo', {delay: 100})//Escribir en input tipo texto
     await page.click('#remote-testing')//click a input tipo checkbox
     await page.click('#tried-test-cafe')

@@ -1,4 +1,5 @@
 const puppeteer = require ('puppeteer') //Importar puppeteer
+const {getText, getCount} = require('../lib/helpers')
 
 describe('Extrayendo información',()=>{
   let browser
@@ -20,6 +21,11 @@ describe('Extrayendo información',()=>{
     await page.waitForSelector('#Header-v2 > nav.Nav-header.Nav-header-desktopCtas > div.Menu > div > div > ul > li:nth-child(9) > a')
     const button = await page.$eval('#Header-v2 > nav.Nav-header.Nav-header-desktopCtas > div.Menu > div > div > ul > li:nth-child(9) > a', (button)=>button.textContent)//ejecuta el document query selector
     console.log('Nombre ', button);
+    //Obtener texto aplicando helpers o librerias
+    
+    const nombreBoton = await getText(page, '#Header-v2 > nav.Nav-header.Nav-header-desktopCtas > div.Menu > div > div > ul > li:nth-child(9) > a')
+    console.log('Nombre Boton Helpers ', nombreBoton);
+
     //Evaluar el contenido de un elemento con xpath
     const [boton] = await page.$x('//*[@id="Header-v2"]/nav[2]/section/button[2]')
     const propiedad = await boton.getProperty('textContent')
@@ -42,6 +48,11 @@ describe('Extrayendo información',()=>{
   }, 350000)
 
   it('Contar los elementos de una pagina', async()=>{
+    //Obtener conteo de imagenes con helpers
+
+    const imagenes = await getCount(page, 'img')
+    console.log('Imagenes con helpers ',imagenes);
+
     const images = await page.$$eval('img', (imagen)=>imagen.length)//Retorna un conteo del selector, a diferencia del $eval, este retorna un arreglo con todos los elementos que encuentre
     console.log('Imagenes ',images);
   }, 35000)
