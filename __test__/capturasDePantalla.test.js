@@ -23,4 +23,29 @@ describe('Captura de Pantalla',()=>{
       fullPage: true,
     })
   }, 350000)
+  test('Captura de pantalla seleccionando un area', async()=>{
+    await page.screenshot({
+      path:'./capturaDePantallaSeleccionandoUnArea.png',
+      clip:{
+        x:0,
+        y:0,
+        width: 500,
+        height: 500,
+      }
+    })
+  }, 350000)
+  test('Captura de pantalla con fondo transparente', async()=>{
+    await page.evaluate(()=>(document.body.style.background = 'transparent'))
+    await page.screenshot({
+      path:'./capturaDePantallaTransparente.png',
+      omitBackground: true,
+    })
+  }, 350000)
+  test('Captura de pantalla a un elemento', async()=>{
+    const elemento = await page.waitForSelector('body > div.L3eUgb > div.o3j99.LLD4me.yr19Zb.LS8OJ > div > img')
+    await elemento.screenshot({
+      path:'./capturaDePantallaElemento.png',
+      
+    })
+  }, 350000)
 })

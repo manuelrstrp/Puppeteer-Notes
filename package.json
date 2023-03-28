@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles",
-    "test-emulacion-de-dispositivos": "jest --forceExit --detectOpenHandles __test__/emulacionDeDispositivos.test.js"
+    "test-emulacion-de-dispositivos": "jest --forceExit --detectOpenHandles __test__/emulacionDeDispositivos.test.js",
+    "visual-test": "jest --updateSnapshot --forceExit --detectOpenHandles __test__/visual.test.js",
+    "firefox-test": "jest --updateSnapshot --forceExit --detectOpenHandles __test__/firefox.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@axe-core/puppeteer": "^4.6.0",
     "jest": "^29.5.0",
-    "puppeteer": "^19.7.5"
+    "jest-image-snapshot": "^6.1.0",
+    "puppeteer": "^19.8.0"
   },
   "devDependencies": {
     "prettier": "^2.8.6"
